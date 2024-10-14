@@ -5,15 +5,15 @@ int main (int argc, char *argv[]) {
 	std::ios::sync_with_stdio(false);
 	std::cin.tie(nullptr);
 
-	int t;
+	long long t;
 	std::cin >> t;
 
 	while (t--) {
-		int n;
-		int k;
+		long long n;
+		long long k;
 		std::cin >> n >> k;
 
-		std::unordered_map<long long, long long> map;
+		std::map<long long, long long> map;
 
 		while (n--) {
 			long long num;
@@ -28,12 +28,17 @@ int main (int argc, char *argv[]) {
 		long long score = 0;
 		for(auto& it : map) {
 			long long cur = it.second;
-			int num = it.first + 1;
-			for (int i = 0; i < k - 1; i++) {
+			long long num = it.first + 1;
+			for (long long i = 0; i < k - 1; i++) {
+				if (map.find(num) == map.end()) {
+					break;
+				}
 				cur += map[num];
 				num += 1;
 			}
+			score = std::max(score, cur);
 		}
+		std::cout << score << std::endl;
 	}
 
 
